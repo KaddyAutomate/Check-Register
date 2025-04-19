@@ -50,3 +50,14 @@ By using this tool, users have reported:
 80%+ reduction in manual prep time
 Zero formatting-related bank rejections
 Higher trust in their internal reporting workflows
+
+NOTE: Save file into the file that is required by the bank. This can be csv, txt, etc... They normally don't accept excel extension file types
+
+REAL LIFE SAMPLE
+![image](https://github.com/user-attachments/assets/5fae18cc-6dc4-4463-925e-8f8303785111)
+![image](https://github.com/user-attachments/assets/2390d205-c4b9-4407-8e52-7e5d99821add)
+![image](https://github.com/user-attachments/assets/cdaaa8b4-cd89-4071-97b2-a9a648f2e2ee)
+
+
+
+
