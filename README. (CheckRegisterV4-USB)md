@@ -1,0 +1,1 @@
+The purpose of this macro is to convert the raw data from MS Dynamics and conver this to the format that is bank acceptable. The bank requires a specific format, else it will not work and it will give you an error. Not all banks share this format, so it does need to be customized. The following is a before and after.
