@@ -27,6 +27,8 @@ Encoding methods
 Amount scaling (e.g., multiplying by 100)
 
 🔍 Before & After Snapshot
+![image](https://github.com/user-attachments/assets/967bea89-31a0-4ae8-9b09-e908b085a32d)
+![image](https://github.com/user-attachments/assets/c7070b21-bc99-4f96-9ccb-a2bd5a4ad82f)
 
 
 💼 Ideal For
