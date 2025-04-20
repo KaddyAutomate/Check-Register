@@ -4,12 +4,19 @@ This macro is designed to automate the transformation of raw data exported from 
 This tool ensures accuracy, consistency, and speed, reducing the need for manual formatting and minimizing the risk of costly submission failures.
 
 🧩 Key Features
+
 ✅ Cleans and formats exported MS Dynamics data
+
 ✅ Adjusts check numbers and reference fields to meet banking standards
+
 ✅ Removes unnecessary blank or null entries
+
 ✅ Extracts unique vendor/payment identifiers
+
 ✅ Performs sum calculations based on unique values
+
 ✅ Applies date formatting, VLOOKUPs, and number formatting
+
 ✅ Auto-generates a fully formatted payment file ready for bank upload
 
 📌 Customization Note
