@@ -1,0 +1,208 @@
+Sub clientsearch()
+
+Columns("A:A").Select
+    Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+    Range("A2").Select
+    ActiveCell.FormulaR1C1 = "=CONCATENATE(RC[4],"", "",RC[2])"
+    Range("A2").Select
+    Selection.AutoFill Destination:=Range("A2:A999")
+    Range("A2:A999").Select
+    Selection.Copy
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+End Sub
+
+
+Sub authreport()
+
+'
+Dim K As Worksheet
+Dim ws As Worksheet
+
+Set K = ThisWorkbook.Sheets("auth_report")
+Set ws = ThisWorkbook.Sheets("clientsearch")
+
+    Range("B2").Select
+        ActiveCell.FormulaR1C1 = "=VLOOKUP(RC[1],clientsearch!R2C1:R900C2,2,FALSE)"
+        Range("B2:B200").FillDown
+
+    K.Cells(1, 12) = "Months"
+        K.Cells(1, 13) = "ID'd"
+        K.Cells(1, 14) = "Unit"
+    
+    Range("L2").Select
+    ActiveCell.FormulaR1C1 = "=ROUNDDOWN(((RC[-4]-RC[-5])/30),0.01)"
+    Range("L2:L200").FillDown
+
+
+    Range("M2").Select
+    ActiveCell.FormulaR1C1 = "=VLOOKUP(RC[1]&RC[-1],Rates!R2C3:R40C4,2,FALSE)"
+    Range("M2:M200").FillDown
+
+    Range("N2").Select
+    ActiveCell.FormulaR1C1 = "=MID(RC[-5],3,SEARCH(""/"",RC[-5])+2)"
+    Range("N2:N200").FillDown
+
+
+
+
+End Sub
+
+
+Sub caserates()
+
+'
+Dim L As Worksheet
+Dim wks As Worksheet
+
+    Dim Col As Variant
+    Dim BlankRows As Long
+    Dim LastRow As Long
+    Dim R As Long
+    Dim StartRow As Long
+        Col = "L"
+        StartRow = 1
+        BlankRows = 1
+
+Set L = ThisWorkbook.Sheets("case")
+Set ws = ThisWorkbook.Sheets("auth_report")
+    L.Cells(1, 1) = "Client ID"
+    L.Cells(1, 2) = "Program ID"
+    L.Cells(1, 3) = "Billing Group ID"
+    L.Cells(1, 4) = "Visit / Service Type ID"
+    L.Cells(1, 5) = "Date (DOS)"
+    L.Cells(1, 6) = "Time In"
+    L.Cells(1, 7) = "Time Out"
+    L.Cells(1, 8) = "Recipient Type ID"
+    L.Cells(1, 9) = "Location ID"
+    L.Cells(1, 10) = "Employee ID"
+    L.Cells(1, 11) = "Rate"
+    L.Cells(1, 12) = "Months"
+
+
+Range("K2").Select
+    ActiveCell.FormulaR1C1 = "=VLOOKUP(RC[-10],auth_report!R2C2:R250C13,12,FALSE)"
+    Range("K2:K118").FillDown
+
+    Range("L2").Select
+ActiveCell.FormulaR1C1 = "=VLOOKUP(RC[-11],auth_report!R2C2:R250C13,11,FALSE)"
+    Range("L2:L118").FillDown
+
+
+            LastRow = Cells(Rows.Count, Col).End(xlUp).Row
+
+            Application.ScreenUpdating = False
+
+            With ActiveSheet
+For R = LastRow To StartRow + 1 Step -1
+
+If .Cells(R, Col) = "6" Then
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 5)
+.Cells(R + 1, 11) = Cells(R, 11) - .02
+
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 4)
+.Cells(R + 1, 11) = Cells(R, 11) - .02
+
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 3)
+.Cells(R + 1, 11) = Cells(R, 11) - .02
+
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 2)
+.Cells(R + 1, 11) = Cells(R, 11) - .02
+
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 1)
+.Cells(R + 1, 11) = Cells(R, 11) - .02
+
+
+ElseIf .Cells(R, Col) = "3" Then
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 2)
+.Cells(R + 1, 11) = Cells(R, 11)
+
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 1)
+.Cells(R + 1, 11) = Cells(R, 11)
+
+
+ElseIf .Cells(R, Col) = "12" Then
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 11)
+.Cells(R + 1, 11) = Cells(R, 11)
+
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 10)
+.Cells(R + 1, 11) = Cells(R, 11)
+
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 9)
+.Cells(R + 1, 11) = Cells(R, 11)
+
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 8)
+.Cells(R + 1, 11) = Cells(R, 11)
+
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 7)
+.Cells(R + 1, 11) = Cells(R, 11)
+
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 6)
+.Cells(R + 1, 11) = Cells(R, 11)
+
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 5)
+.Cells(R + 1, 11) = Cells(R, 11)
+
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 4)
+.Cells(R + 1, 11) = Cells(R, 11)
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 3)
+.Cells(R + 1, 11) = Cells(R, 11)
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 2)
+.Cells(R + 1, 11) = Cells(R, 11)
+.Cells(R + 1, Col).EntireRow.Insert Shift:=xlDown
+.Cells(R + 1, 1) = Cells(R, 1)
+.Cells(R + 1, 5) = ws.Application.WorksheetFunction.EDate(Cells(R, 5), 1)
+.Cells(R + 1, 11) = Cells(R, 11)
+
+End If
+Next R
+End With
+Application.ScreenUpdating = True
+
+
+    L.Range("B2:B777") = "8"
+   L.Range("C2:C777") = "1"
+    L.Range("D2:D777") = "196"
+    L.Range("F2:F777") = "0:01"
+    L.Range("G2:G777") = "1:01"
+    L.Range("H2:H777") = "2"
+    L.Range("I2:I777") = "34"
+    L.Range("J2:J777") = "3891"
+
+
+
+End Sub
